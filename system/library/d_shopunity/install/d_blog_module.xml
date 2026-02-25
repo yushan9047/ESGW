@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <name>d_blog_module</name>
+    <code>d_blog_module</code>
+    <description></description>
+    <version>1.0.0</version>
+    <author>Dreamvention</author>
+    <link>http://dreamvention.com</link>
+    <file path="admin/model/user/user.php">
+        <operation error="skip">
+            <search><![CDATA[$this->db->query("INSERT INTO `" . DB_PREFIX . "user` SET username = '" . $this->db->escape($data['username']) . "', user_group_id = '" . (int)$data['user_group_id'] . "', salt = '" . $this->db->escape($salt = token(9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', image = '" . $this->db->escape($data['image']) . "', status = '" . (int)$data['status'] . "', date_added = NOW()");]]></search>
+            <add position="after"><![CDATA[
+                //d_blog_module
+                return $this->db->getLastId();
+                //d_blog_module
+            ]]></add>
+        </operation>
+    </file>
+</modification>

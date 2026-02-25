@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <name>d_twig_manager</name>
+    <code>d_twig_manager</code>
+    <description>Adds support for twig templating engine</description>
+    <version>2.1.7</version>
+    <author>Dreamvention</author>
+    <link>http://dreamvention.com</link>
+    <file path="system/library/template/twig.php">
+        <operation error="skip" info="">
+            <search><![CDATA[$this->twig = new \Twig_Environment($loader, $config);]]></search>
+            <add position="after"><![CDATA[
+            //d_twig_manager.xml
+            if (isset($this->data['d_twig_manager'])) {
+                $this->twig->addExtension($this->data['d_twig_manager']);
+				unset($this->data['d_twig_manager']);
+            } else if (isset($this->data['d_registry'])) {
+                $this->data['d_registry']->set('d_twig_manager_extension', new \Twig_Extension_DTwigManager($this->data['d_registry']));
+                $this->twig->addExtension($this->data['d_registry']->get('d_twig_manager_extension'));
+                unset($this->data['d_registry']);
+            }
+            ]]></add>
+        </operation>
+	  <operation error="skip" info="">
+            <search><![CDATA[$this->twig = new \Twig\Environment($loader, $config);]]></search>
+            <add position="after"><![CDATA[
+            //d_twig_manager.xml for latest twig version and less than 3.0.3.5
+            if (isset($this->data['d_twig_manager'])) {
+                $this->twig->addExtension($this->data['d_twig_manager']);
+				unset($this->data['d_twig_manager']);
+            } else if (isset($this->data['d_registry'])) {
+                $this->data['d_registry']->set('d_twig_manager_extension', new \Twig_Extension_DTwigManager($this->data['d_registry']));
+                $this->twig->addExtension($this->data['d_registry']->get('d_twig_manager_extension'));
+                unset($this->data['d_registry']);
+            }
+            ]]></add>
+        </operation>
+
+        <operation error="skip" info="">
+            <search><![CDATA[$twig = new \Twig\Environment($loader, $config);]]></search>
+            <add position="after"><![CDATA[
+            //d_twig_manager.xml >= 3.0.3.5 
+            if (isset($this->data['d_twig_manager'])) {
+                $twig->addExtension($this->data['d_twig_manager']);
+				unset($this->data['d_twig_manager']);
+            } else if (isset($this->data['d_registry'])) {
+                $this->data['d_registry']->set('d_twig_manager_extension', new \Twig_Extension_DTwigManager($this->data['d_registry']));
+                $twig->addExtension($this->data['d_registry']->get('d_twig_manager_extension'));
+                unset($this->data['d_registry']);
+            }
+            ]]></add>
+        </operation>
+    </file>
+    <file path="catalog/controller/event/theme.php">
+        <operation error="skip" info="">
+            <search><![CDATA[$twig = new \Twig_Environment($loader, $config);]]></search>
+            <add position="after"><![CDATA[
+            //d_twig_manager.xml
+            if (file_exists(DIR_SYSTEM . 'library/template/Twig/Extension/DTwigManager.php')) {
+                $twig->addExtension(new Twig_Extension_DTwigManager($this->registry));
+            }
+            ]]></add>
+        </operation>
+    </file>
+</modification>

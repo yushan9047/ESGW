@@ -1,0 +1,95 @@
+{{ header }}
+  <main>
+  
+	{{ content_top }}
+  
+  
+
+
+
+    <!-- Pricing section start -->
+    <section class="ep-pricing-section pt-120">
+	<!-- <section class="ep-services-section py-120" data-background="assets/img/services/service-bg.png"> -->
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 mx-auto">
+            <div class="section-title-block text-center">
+              <h6 class="section-sub-title position-relative d-inline-block text-uppercase">Our Services</h6>
+              <h2 class="section-title split-text right">數位島平台系統</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+		{% for service in services %}
+          <div class="col-lg-4 col-md-6 mx-auto mx-lg-0">
+            <div class="pricing-item rounded-30">
+              <a href="index.php?route=information/service&id={{ service.post_id }}" class="d-block w-100">
+                <div>
+					<img src="image/{{ service.image }}" alt="service-icon" class="img-fluid w-100 rounded-20">
+                </div>
+                <div class="text-service">
+					{% if service.sub_title %}
+                  <h4 class="service-title">{{ service.sub_title }}</h4>
+				  {% else %}
+                  <h4 class="service-title">&nbsp;</h4>
+				  {% endif %}
+				  <p>{{ service.title }}</p>
+                </div>
+              </a>
+            </div>
+          </div>
+		{% endfor %}
+        </div>
+      </div>
+    </section>
+    <!-- Pricing section end -->
+
+	{{ content_bottom }}
+
+{#
+    <!-- Blog section start -->
+    <section class="ep-blog-section pt-120">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 mx-auto">
+            <div class="section-title-block text-center">
+              <h6 class="section-sub-title position-relative d-inline-block text-uppercase">blog & News</h6>
+              <h2 class="section-title split-text right">數位島永續新聞</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+		{% for blog in blogs %}
+          <div class="col-lg-4 col-md-6">
+            <div class="blog-item rounded-20">
+              <div class="img overflow-hidden">
+                <a href="blog-details.html" class="d-block w-100">
+                  <img src="image/{{ blog.image }}" alt="{{ blog.title }}" class="img-fluid w-100">
+                </a>
+              </div>
+              <div class="text">
+                <div class="blog-meta d-flex align-items-center justify-content-between gap-2">
+                  <a href="#" class="d-flex align-items-center">
+                    <i class="fas fa-calendar-alt"></i>
+                    {{ blog.date_published|date("Y-m-d") }}
+                  </a>
+                </div>
+                <h4 class="blog-title">
+                  <a href="index.php?route=information/blog&id={{ blog.post_id }}">{{ blog.title }}</a>
+                </h4>
+                <a href="index.php?route=information/blog&id={{ blog.post_id }}"
+                  class="theme-btn theme-btn-border position-relative d-inline-flex align-items-center">
+                  閱讀更多
+                </a>
+              </div>
+            </div>
+          </div>
+		{% endfor %}
+        </div>
+      </div>
+    </section>
+#}
+
+    <!-- Blog section end -->
+  </main>
+{{ footer }}

@@ -1,0 +1,4 @@
+RewriteEngine On
+
+RewriteCond %{HTTP_HOST} ^(www\.)?esgdigitalmind\.com$ [NC]
+RewriteRule ^(.*)$ https://www.suiddo.com/$1 [R=301,L]

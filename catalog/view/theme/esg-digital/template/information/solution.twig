@@ -1,0 +1,90 @@
+{{ header }}  
+  <!-- Main area start -->
+  <main>
+    <!-- Page header section start -->
+    <section class="ep-page-header-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="header-img">
+              <img src="catalog/view/theme/esg-digital/assets/img/images/page-header-img.svg" alt="page-header-img">
+            </div>
+          </div>
+          <div class="col-sm-8 ms-auto">
+            <div class="bread-crumb text-end">
+              <h1 class="page-title">{{ heading_title }}</h1>
+              <ul class="list-unstyled d-flex flex-wrap align-items-center justify-content-end mt-30">
+				  {% for breadcrumb in breadcrumbs %}
+					<li>
+					  <a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+					  {% if not loop.last %}
+						<i class="fa-solid fa-chevron-right mx-1"></i>
+					  {% endif %}
+					</li>
+				  {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Page header section end -->
+    <!-- Project details section start -->
+    <section class="ep-project-details-section pt-120">
+      <div class="container">
+
+
+
+
+
+        <div class="row">
+			<style>
+				.video-container {
+					position: relative;
+					width: 100%; /* 寬度填滿容器 */
+					padding-top: 56.25%; /* 高度設定為 16:9 的比例 (9/16*100) */
+					overflow: hidden;
+				}
+
+				.video-container iframe {
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%; /* 讓 iframe 填滿容器 */
+					height: 100%; /* 讓 iframe 高度依比例縮放 */
+					border: 0;
+				}
+
+			</style>
+			
+			{% if youtubes %}
+			{% for youtube in youtubes %}
+			<div class="video-container">
+				<iframe 
+					src="{{ youtube.video|replace({'watch?v=': 'embed/'}) }}" 
+					title="YouTube video player" 
+					frameborder="0" 
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+					referrerpolicy="strict-origin-when-cross-origin" 
+					allowfullscreen>
+				</iframe>
+			</div>
+			{% endfor %}
+			{% endif %}		
+		</div>
+		
+		
+        <div class="project-description pt-120">
+
+			{{ description }}
+
+        </div>
+      </div>
+    </section>
+    <!-- Project details section end -->
+
+
+	
+  </main>
+  <!-- Main area end -->  
+{{ footer }}
